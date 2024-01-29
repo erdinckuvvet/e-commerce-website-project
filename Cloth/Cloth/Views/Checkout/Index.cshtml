@@ -1,0 +1,303 @@
+﻿@model IEnumerable<Cloth.Models.Address>
+@using Cloth.Models.Enums
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<hr />
+
+
+<link rel="stylesheet" href="~/Content/checkout.css">
+
+<div class="container" style="height:500px;">
+    <div id="side" class="side">
+        <h2>Items in your cart</h2>
+        <div id="items">
+
+        </div>
+    </div>
+
+    <div class="side">
+        <div>
+            <h2>Select address</h2>
+            @foreach (var address in Model)
+            {
+                <input type="radio" id="address" name="address" value="@address.Id">
+                <label for="address">@address.Street, @address.Apartment, @address.City, @address.PostCode</label>
+                <hr />
+            }
+            @Html.ActionLink("Create New Address", "Create", "Addresses")
+        </div>
+        <hr />
+        <div>
+            <h2>Enter payment credentials</h2>
+            <div>
+                <label for="card_number">Credit Card Number:</label>
+                <input type="text" id="card_number" name="card_number" placeholder="Enter your card number" required>
+            </div>
+
+            <div>
+                <label for="expiration_date">Expiration Date:</label>
+                <input type="text" id="expiration_date" name="expiration_date" placeholder="MM/YY" required>
+            </div>
+
+            <div>
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="Enter CVV" required>
+            </div>
+        </div>
+        <div id="payment">
+            <button id="btn_payment">Pay</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script defer>
+
+    $(document).ready(function () {
+
+        const products = JSON.parse(localStorage.getItem("cart"));
+        const itemsDiv = document.getElementById("items");
+        itemsDiv.style.maxHeight = "300px";
+        itemsDiv.style.overflowY = "auto";
+
+        if (products == null) {
+            return;
+        }
+
+        // Create a table element
+        const table = document.createElement("table");
+        table.style.borderCollapse = "collapse"; // Optional: collapse borders for a cleaner look
+
+        // Create and append the table header row
+        const headerRow = document.createElement("tr");
+        for (const attribute of ["Image", "Name", "Size", "Price", "Quantity"]) {
+            const th = document.createElement("th");
+            th.textContent = attribute;
+            th.style.padding = "8px"; // Add padding to header cells
+            th.style.textAlign = "center"; // Center text
+            headerRow.appendChild(th);
+        }
+        table.appendChild(headerRow);
+
+
+
+        // Create and append rows for each product
+        for (let i = 0; i < products.length; i++) {
+            const product = products[i];
+            const row = document.createElement("tr");
+           
+            // Create and append cells for each attribute
+            for (const attribute of ["image", "name", "size", "price", "boughtAmount"]) {
+                const cell = document.createElement("td");
+
+                // For image path, create an image element
+                if (attribute === "image") {
+                    const img = document.createElement("img");
+                    img.src = `Images/Items/${product[attribute]}`;
+                    img.alt = product.name;
+                    img.style.width = "50px"; // Set a specific width for the image, adjust as needed
+                    cell.appendChild(img);
+                } else if (attribute === "price") {
+                    // For price, add a "$" sign
+                    cell.textContent = `$${product[attribute]}`;
+                } else if (attribute === "size"){
+                    // Convert enum to string for product size
+                    cell.textContent = enumToString(product[attribute]);
+                } else {
+                    // For other attributes, simply set the text content
+                    cell.textContent = product[attribute];
+                }
+
+                cell.style.padding = "8px"; // Add padding to cells
+                cell.style.textAlign = "center"; // Center text
+                row.appendChild(cell);
+            }
+
+            // Create and append cell for buttons
+            const actionsCell = document.createElement("td");
+
+            // Create "+" button
+            const plusButton = document.createElement("button");
+
+
+            plusButton.textContent = "+";
+            plusButton.addEventListener("click", function () {
+                // Increment the bought amount and update local storage
+                products[i].boughtAmount++;
+                localStorage.setItem("cart", JSON.stringify(products));
+                // Update the displayed value in the table
+                row.cells[4].textContent = products[i].boughtAmount;
+
+                // Check if the bought amount becomes 0 after incrementing
+                if (products[i].boughtAmount === 0) {
+                    // Remove the row from the table and update local storage
+                    table.deleteRow(row.rowIndex);
+                    products.splice(i, 1);
+                    localStorage.setItem("cart", JSON.stringify(products));
+                }
+                updateTotalPrice();
+            });
+
+            // Create "-" button
+            const minusButton = document.createElement("button");
+            minusButton.textContent = "-";
+            minusButton.addEventListener("click", function () {
+                // Decrement the bought amount (with a minimum of 0) and update local storage
+                products[i].boughtAmount = Math.max(0, products[i].boughtAmount - 1);
+                localStorage.setItem("cart", JSON.stringify(products));
+                // Update the displayed value in the table
+                row.cells[4].textContent = products[i].boughtAmount;
+
+                // Check if the bought amount becomes 0 after decrementing
+                if (products[i].boughtAmount === 0) {
+                    // Remove the row from the table and update local storage
+                    table.deleteRow(row.rowIndex);
+                    products.splice(i, 1);
+                    localStorage.setItem("cart", JSON.stringify(products));
+                    location.reload(true);
+                }
+                updateTotalPrice();
+            });
+
+            // Append buttons to the cell
+            actionsCell.appendChild(minusButton);
+            actionsCell.appendChild(plusButton);
+
+            // Append the cell to the row
+            row.appendChild(actionsCell);
+
+            // Append the row to the table
+            table.appendChild(row);
+        }
+
+        // Append the table to the itemsDiv
+        itemsDiv.appendChild(table);
+
+        sideDiv = document.getElementById("side");
+        hr = document.createElement("hr");
+        sideDiv.appendChild(hr);
+
+        // Create and append a div for displaying the total price
+        const totalPriceDiv = document.createElement("div");
+        totalPriceDiv.id = "totalPrice";
+        totalPriceDiv.style.textAlign = "center"; // Center text
+        sideDiv.appendChild(totalPriceDiv);
+
+        // Initial update of the total price
+        updateTotalPrice();
+
+        // Function to update the total price
+        function updateTotalPrice() {
+            const totalPrice = products.reduce((acc, product) => acc + product.price * product.boughtAmount, 0);
+            totalPriceDiv.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+        }
+
+        function enumToString(enumValue) {
+            switch (enumValue) {
+                case "0": return 'XS';
+                case "1": return 'S';
+                case "2": return 'M';
+                case "3": return 'L';
+                case "4": return 'XL';
+                case "5": return 'XLL';
+                default: return 'Unknown Size';
+            }
+        }
+
+        function validateCard() {
+            // Regular expressions for validation
+            var cardNumberRegex = /^\d{16}$/;  // 16-digit card number
+            var expirationDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;  // MM/YY format
+            var cvvRegex = /^\d{3}$/;  // 3-digit CVV
+
+            // Get input values
+            var cardNumberValue = document.getElementById('card_number').value.trim();
+            var expirationDateValue = document.getElementById('expiration_date').value.trim();
+            var cvvValue = document.getElementById('cvv').value.trim();
+
+            // Validate each input
+            if (!cardNumberRegex.test(cardNumberValue)) {
+                alert('Invalid card number. Please enter a 16-digit number.');
+                return false;
+            }
+
+            if (!expirationDateRegex.test(expirationDateValue)) {
+                alert('Invalid expiration date. Please use MM/YY format.');
+                return false;
+            }
+
+            if (!cvvRegex.test(cvvValue)) {
+                alert('Invalid CVV. Please enter a 3-digit number.');
+                return false;
+            }
+            return true;
+        }
+
+
+
+        // Click event for the button
+        $('#btn_payment').click(function () {
+            // Make the AJAX POST request
+
+
+            @*console.log(products)
+            console.log(JSON.stringify( {
+                    ProductsVM: products,
+                    AddressVM: @Model.FirstOrDefault(x=> x.Id == x.Id).Id
+                    }))
+            address_value = @Model.FirstOrDefault(x=> x.Id == x.Id).Id*@
+            if (products === null) {
+                alert("Add items to your cart!");
+                return
+            } else {
+                if (products.length == 0) {
+                    alert("Add items to your cart!");
+                    return
+                }
+            }
+
+            var address_value = $('input[name="address"]:checked').val();
+            console.log(address_value);
+            if (address_value != undefined) {
+                if (validateCard()) {
+                    $.ajax({
+                        url: '/Checkout/Payment',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            ProductsVM: JSON.stringify(products),
+                            AddressVM: JSON.stringify({ id: address_value })
+                        }),
+                        success: function (result) {
+                            // Handle the response from the server
+                            console.log("islem basarili", result);
+                            localStorage.clear();
+                            window.location.href = '/Home/Index';
+
+                        },
+                        error: function (error) {
+                            // Handle the error if the request fails
+                            console.error(error, "Bir hata var kardesim");
+                        }
+                    });
+                }
+            } else {
+                alert("Select an address!");
+            }
+
+            alert("Payment Successful!");
+
+
+        });
+
+    });
+
+</script>
+
+
+
+
+

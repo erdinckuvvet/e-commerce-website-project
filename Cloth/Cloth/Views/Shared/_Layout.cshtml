@@ -1,0 +1,147 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/index.css" />
+    <link rel="stylesheet" href="~/Content/product.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/style.css">
+    <link rel="stylesheet" href="~/Content/responsive.css">
+    <link rel="stylesheet" href="~/Content/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="~/Scripts/sidebar.js" defer></script>
+
+</head>
+
+    
+<body>
+    <header>
+        <div>
+            <div class="flex-container">
+                <div class="leftSidebar" id="leftSidebar" onclick="toggleLeftSidebar()">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li>@Html.ActionLink("Woman", "Search", "Home", new { gender = 1 }, null)</li>
+                        <li>@Html.ActionLink("Man", "Search", "Home", new { gender = 0 }, null)</li>
+                        <li>@Html.ActionLink("Unisex", "Search", "Home", new { gender = 2 }, null)</li>
+                        <li>@Html.ActionLink("About Us", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    <div class="leftSidebarButton"></div>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <p id="username">@User.Identity.Name</p>
+                    }
+                </div>
+
+
+                <div class="header_middle">
+                    <div class="logo">
+                        <a href="/"><img src="~/Images/cloth_logo.png" alt="#" /></a>
+                    </div>
+                </div>
+
+                <div class="header_rightside">
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <a class="login" href="/Account/Login"><img src="~/Images/login.png" alt="Login" title="Login" /></a>
+                        </div>
+                        <div class="flex-item">
+                            <a class="orders" href="/Orders/Orders"><img src="~/Images/orders.png" alt="My Orders" title="My Orders" /></a>
+                        </div>
+                        <div class="flex-item">
+                            <a class="cart" href="/Checkout"><img src="~/Images/shopping_cart.png" alt="My Cart" title="My Cart" /></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="category-search">
+        <nav class="dropmenu">
+            <ul>
+                <li>
+                    <a href="#">Woman</a>
+                    <ul>
+                        @Html.ActionLink("TSHIRT", "Search", "Home", new { gender = 1, category = 7 }, null)
+                        @Html.ActionLink("SWEATSHIRT", "Search", "Home", new { gender = 1, category = 6 }, null)
+                        @Html.ActionLink("SUITPANTS", "Search", "Home", new { gender = 1, category = 5 }, null)
+                        @Html.ActionLink("SHIRT", "Search", "Home", new { gender = 1, category = 4 }, null)
+                        @Html.ActionLink("JOGGER", "Search", "Home", new { gender = 1, category = 3 }, null)
+                        @Html.ActionLink("JEANS", "Search", "Home", new { gender = 1, category = 2 }, null)
+                        @Html.ActionLink("COAT", "Search", "Home", new { gender = 1, category = 1 }, null)
+                        @Html.ActionLink("CARGOPANTS", "Search", "Home", new { gender = 1, category = 0 }, null)
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Man</a>
+                    <ul>
+                        @Html.ActionLink("TSHIRT", "Search", "Home", new { gender = 0, category = 7 }, null)
+                        @Html.ActionLink("SWEATSHIRT", "Search", "Home", new { gender = 0, category = 6 }, null)
+                        @Html.ActionLink("SUITPANTS", "Search", "Home", new { gender = 0, category = 5 }, null)
+                        @Html.ActionLink("SHIRT", "Search", "Home", new { gender = 0, category = 4 }, null)
+                        @Html.ActionLink("JOGGER", "Search", "Home", new { gender = 0, category = 3 }, null)
+                        @Html.ActionLink("JEANS", "Search", "Home", new { gender = 0, category = 2 }, null)
+                        @Html.ActionLink("COAT", "Search", "Home", new { gender = 0, category = 1 }, null)
+                        @Html.ActionLink("CARGOPANTS", "Search", "Home", new { gender = 0, category = 0 }, null)
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Unisex</a>
+                    <ul>
+                        @Html.ActionLink("TSHIRT", "Search", "Home", new { gender = 2, category = 7 }, null)
+                        @Html.ActionLink("SWEATSHIRT", "Search", "Home", new { gender = 2, category = 6 }, null)
+                        @Html.ActionLink("SUITPANTS", "Search", "Home", new { gender = 2, category = 5 }, null)
+                        @Html.ActionLink("SHIRT", "Search", "Home", new { gender = 2, category = 4 }, null)
+                        @Html.ActionLink("JOGGER", "Search", "Home", new { gender = 2, category = 3 }, null)
+                        @Html.ActionLink("JEANS", "Search", "Home", new { gender = 2, category = 2 }, null)
+                        @Html.ActionLink("COAT", "Search", "Home", new { gender = 2, category = 1 }, null)
+                        @Html.ActionLink("CARGOPANTS", "Search", "Home", new { gender = 2, category = 0 }, null)
+                    </ul>
+                </li>
+                <li>
+                    @Html.ActionLink("About Us", "About", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("Contact", "Contact", "Home")
+                </li>
+            </ul>
+        </nav>
+        <div class="space"></div>
+        <div class="header-search-container">
+            <form action="/Home/Search" method="get">
+                <input type="search" name="keyword" placeholder="Search...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+    <footer>
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <img src="~/Images/payment.png" alt="payment method" class="payment-img">
+
+                <p class="copyright">
+                    Copyright &copy; <a href="#">Cloth</a> all rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+    </footer>
+</body>
+</html>

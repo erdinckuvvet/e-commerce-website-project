@@ -1,0 +1,361 @@
+
+/*--------------------------------------------------------------------- import Fonts ---------------------------------------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,400,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
+
+/*****---------------------------------------- 1) font-family: 'Rajdhani', sans-serif;
+ 2) font-family: 'Poppins', sans-serif;
+ ----------------------------------------*****/
+
+
+/*--------------------------------------------------------------------- import Files ---------------------------------------------------------------------*/
+
+@import url(animate.min.css);
+@import url(normalize.css);
+@import url(meanmenu.css);
+@import url(owl.carousel.min.css);
+@import url(slick.css);
+@import url(jquery-ui.css);
+@import url(nice-select.css);
+
+/*--------------------------------------------------------------------- skeleton ---------------------------------------------------------------------*/
+
+* {
+     box-sizing: border-box !important;
+}
+
+html {
+     scroll-behavior: smooth;
+}
+
+body {
+     color: #666666;
+     font-size: 14px;
+     font-family: 'Poppins', sans-serif;
+     line-height: 1.80857;
+     font-weight: normal;
+     text-align:center;
+}
+
+a {
+     color: #1f1f1f;
+     text-decoration: none !important;
+     outline: none !important;
+     -webkit-transition: all .3s ease-in-out;
+     -moz-transition: all .3s ease-in-out;
+     -o-transition: all .3s ease-in-out;
+     transition: all .3s ease-in-out;
+}
+
+
+
+/**-- heading section --**/
+
+
+/*---------------------------- preloader area ----------------------------*/
+
+.loader_bg {
+     position: fixed;
+     z-index: 9999999;
+     background: #fff;
+     width: 100%;
+     height: 100%;
+}
+
+.loader {
+     height: 100%;
+     width: 100%;
+     position: absolute;
+     left: 0;
+     top: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.loader img {
+     width: 280px;
+}
+
+
+/*--------------------------------------------------------------------- layout new css ---------------------------------------------------------------------*/
+
+.header {
+     
+     width: 100%;
+     background: #fff;
+     padding: 20px 20px 20px 0px;
+     text-align:center;
+     z-index: 99;
+}
+
+#leftSidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background-color: #e4e4e4;
+    left:-200px;
+}
+
+#leftSidebar.active {
+    left: 0px;
+}
+
+#leftSidebar ul li {
+        list-style: none;
+        padding: 10px 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.4);
+        cursor: pointer;
+        transition: all 0.5s linear;
+    }
+
+#leftSidebar ul li:hover {
+    background-color: lightgray;
+}
+
+#leftSidebar ul li a {
+    color: black;
+    text-decoration: none;
+}    
+
+.leftSidebarButton {
+    position:absolute;
+    left:200px;
+    top:0;
+}
+
+.leftSidebarButton:before {
+    content: "\f0c9";
+    font-family: FontAwesome;
+    color: black;
+    font-size: 30px;
+    position: absolute;
+    background-color: white;
+    padding: 5px 10px;
+    transition: all 0.5s linear;
+}
+
+.leftSidebarButton:hover:before {
+    background-color: #e4e4e4;
+}
+
+.leftsideButton.active2 {
+    left: 200px;
+}
+    
+.logo img {
+    width: 160px;
+    height: 80px;
+}        
+
+.header_middle {
+    margin-left: 42%;
+    margin-right: 37%;
+}
+
+
+.header_rightside {
+    float:right;
+}
+
+    .header_rightside img {
+        margin-top:45%;
+        width: 30px;
+        height: 30px;
+        margin-right: 8px;
+        position:relative;
+        display:inline-block;
+    }
+
+    .header_rightside .flex-item img:hover {
+        /* Position the alt text directly over the image */
+        position: relative;
+    }
+
+    .header_rightside .flex-item img:hover::after {
+        content: attr(alt); /* Insert the alt text content */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center the text */
+        background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+        color: #fff; /* White text */
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    z-index: 98;
+}
+
+/** Categories **/
+.category-search {
+    width: 100%;
+    background: #fff;
+    padding: 20px 40px;
+    margin-bottom: 20px;
+    z-index: 97 !important;
+}
+.dropmenu {
+    font-weight: 600;
+    text-align: center;
+    margin-left: 18%;
+    position: absolute;
+    z-index: 96 !important;
+}
+
+    .dropmenu ul {
+        padding-top: 8px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        z-index: 96 !important;
+    }
+
+.dropmenu li {
+    float:left;
+    position:relative;
+    width:180px;
+}
+
+    .dropmenu ul li ul {
+        display: none;
+        z-index: 95 !important;
+    }
+
+.dropmenu ul li:hover ul {
+    display: block;
+}
+
+.dropmenu ul li a {
+    text-decoration:none;
+    background:white;
+    display:block;
+    color: black;
+    text-align:center;
+    padding: 5px;
+}
+
+.dropmenu ul li ul li a {
+    text-decoration: none;
+    background: white;
+    text-align:left;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+}
+
+    .dropmenu li a:hover {
+        background: #e4e4e4;
+        transition: 0.5s;
+    }
+
+    .dropmenu ul li ul li a:hover {
+        background: #e4e4e4;
+    }
+
+/** search bar**/
+
+form {
+    float:right;
+    color: #555;
+    display: flex;
+    padding: 0px;
+    border-bottom-style: solid;
+    border-radius: 0px;
+}
+
+input[type="search"] {
+    border: none;
+    background: transparent;
+    margin-left: 10px;
+    padding: 0px 8px;
+    font-size: 14px;
+    color: inherit;
+    border: 1px solid transparent;
+    border-radius: inherit;
+}
+
+input[type="search"]::placeholder {
+    color: #bbb;
+
+}
+
+button[type="submit"] {
+    text-indent: -999px;
+    overflow: hidden;
+    width: 50px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+button[type="submit"]:hover {
+    opacity: 1;
+}
+
+
+/** footer **/
+
+footer {
+    margin-top: 50px;
+    font-family: Poppins;
+    background-color: #e4e4e4;
+    padding-top: 50px;
+    text-align: center;
+}
+
+.cont {
+     padding-top: 20px;
+}
+
+.cont h3 {
+     color: #414141;
+     font-size: 40px;
+     line-height: 50px;
+     font-weight: bold;
+}
+
+.cont_call h3 {
+     color: #414141;
+     font-size: 50px;
+     line-height: 60px;
+     font-weight: bold;
+     text-transform: uppercase;
+}
+
+.copyright {
+     padding: 20px 0px;
+}
+
+.copyright p {
+     color: #fff;
+     font-size: 18px;
+     line-height: 22px;
+     text-align: center;
+}
+
+.copyright a {
+     color: black;
+     font-weight:600;
+}
+
+.copyright a:hover {
+     color: #f6d601;
+}
+
+
+/** end footer **/
+
+
+/*------------------------------------------------------------------- 991px x 768px ---------------------------------------------------------------------*/

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Cloth.Models.Order>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div  style="margin-top: 4%; position:relative;">
+    <div style="text-align: left; font-size: 18px; margin-left:4%;"><p><strong>My Orders</strong></p></div>
+
+
+
+    <div style=" font-size:14px;" class="container">
+        @foreach (var item in Model)
+        {
+            <div style=" margin-bottom:5px;" class="col-6 text-left">
+                <div class="card">
+                    <div class="row">
+                        <div style="margin:10px" class="col-md-5">
+                            @foreach (var element in @item.ProductOrders)
+                            {
+                                <p class="card-text"><strong>Product: </strong>@element.Product.Name</p>
+                                <p class="card-text"><strong>Price: &nbsp;</strong>$@element.Product.Price</p>
+                            }
+                            <div>
+                                <p class="card-text">
+                                    <strong>Address: </strong>@item.Address.Apartment,
+                                    @item.Address.Street, @item.Address.City, @item.Address.PostCode
+                                </p>
+
+                                <p class="card-text"><strong>Order Date: </strong>@item.Date.</p>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px" class="col-md-6">
+                            @foreach (var element in @item.ProductOrders)
+                            {
+                                <img style="height:180px; width:220px;" src="/Images/Items/@element.Product.Image" class="img-fluid" alt="Product Image">
+                            }
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+        }
+    </div>
+</div>

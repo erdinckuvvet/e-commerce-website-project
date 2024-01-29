@@ -1,0 +1,67 @@
+﻿@model Cloth.Models.Product
+@using Cloth.Models.Enums
+
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="prod-container">
+    <div class="product-page-img">
+        <img src="~/Images/Items/@Model.Image" alt="">
+    </div>
+    <div class="details">
+        <section class="product-name-price">
+            <h1 class="product-page-name">@Model.Name</h1>
+            <span class="product-page-price">$@Model.Price</span>
+        </section>
+        <section class="product-color-fit">
+            <p>@Model.Color</p>
+            <p>@Model.Fit FIT</p>
+        </section>
+        <section class="product-size">
+            <select id="size-choice" name="size-choice">
+                @foreach (Size size in Enum.GetValues(typeof(Size)))
+                {
+                    <option class="size-option" value="@((int)size)">@size</option>
+                }
+            </select>
+        </section>
+        <button id="add-to-cart">Add to Cart</button>
+    </div>
+</div>
+
+
+<script>
+    const sizeDropdown = document.getElementById("size-choice");
+
+    const addtocart_btn = document.querySelector("#add-to-cart");
+    addtocart_btn.addEventListener("click", () => {
+        if (localStorage.getItem("cart") == null) {
+            const arr = []
+            localStorage.setItem("cart", JSON.stringify(arr))
+        }
+
+        const cartItems = JSON.parse(localStorage.getItem("cart"));
+
+        var selectedSize = sizeDropdown.value;
+
+
+        const jsonToSave = {}
+        jsonToSave.id = @Model.Id;
+        jsonToSave.boughtAmount = 1; // satın alınacak adeti seçtir ve veriyi yaz
+        jsonToSave.size = selectedSize // satın alınan bedeni seçtri ve veriyi yaz
+        jsonToSave.image = `@Model.Image`
+        jsonToSave.price = @Model.Price
+        jsonToSave.name = `@Model.Name`;
+
+
+        cartItems.push(jsonToSave)
+
+
+        localStorage.setItem("cart", JSON.stringify(cartItems))
+
+        alert("Item is added to cart!");
+    })
+
+</script>

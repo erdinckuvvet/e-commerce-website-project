@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Noto Sans", sans-serif;
+    background-color: #faf9f8;
+}
+
+.prod-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px !important;
+}
+
+.product-name-price {
+    text-align: start;
+}
+
+.product-page-img img {
+    width: 500px;
+}
+
+.details {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    color: #222222;
+    letter-spacing: 0.025rem;
+    width: 500px;
+}
+
+    .details section {
+        height: max-content !important;
+        margin: 5px 0 !important;
+    }
+
+
+.product-page-name {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06rem;
+}
+
+.product-page-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+
+.product-color-fit {
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+}
+
+.product-color-fit p {
+    margin: 5px 0 !important;
+}
+
+
+
+.product-size {
+    width: 100% ;
+    height: max-content;
+}
+
+#size-choice {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #faf9f8;
+}
+
+
+#add-to-cart {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.1rem;
+    width: 100%;
+    background-color: #222222;
+    color: #fff;
+    padding: 0.8rem 0;
+    margin-top: 10px !important;
+    cursor: pointer;
+}

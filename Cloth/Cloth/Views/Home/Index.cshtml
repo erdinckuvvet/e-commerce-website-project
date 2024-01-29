@@ -1,0 +1,59 @@
+﻿@model List<Cloth.Models.Product>
+@using System.Linq.Expressions
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div id="home">
+    <div class="main-container">
+        @*<section id="section1">
+            <div class="section-div">
+                <div class="center-col">
+                    <div class="text-div">
+                        <p class="p1">NEW PRODUCTS</p>
+                        <h2 class="center-div-h2">College style</h2>
+                    </div>
+                    <a class="shop-now" href="#">Shop now</a>
+                </div>
+            </div>
+        </section>*@
+
+        <section id="section2">
+            <h2 class="section-h2">Our Products</h2>
+            
+            <div class="products-grid">
+                @foreach (var product in Model)
+                {
+                    <div class="product">
+
+                        <div class="product-img-container">
+                            <a href="@Url.Action("Details", "Products", new { id = product.Id })" class="product-link">
+                                <img class="product-img" src="~/Images/Items/@product.Image" />
+                            </a>
+                        </div>
+                        <div class="product-info">
+                            <a href="@Url.Action("Details", "Products", new { id = product.Id })" class="product-link">
+                                <p class="product-name">@product.Name</p>
+                            </a>
+                            <p class="product-price">@string.Format("${0:N2}", product.Price)</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+
+        @*<section id="section3">
+            <div class="section-div">
+                <div class="center-col">
+                    <div class="text-div">
+                        <h2 class="center-div-h2">Refined essentials</h2>
+                    </div>
+                    <a class="shop-now" href="#">Shop now</a>
+                </div>
+            </div>
+        </section>*@
+    </div>
+</div>

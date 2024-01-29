@@ -1,0 +1,18 @@
+﻿.container {
+    width: 100%;
+    padding-top: 50px;
+}
+
+.side {
+    float: left;
+    width: 50%;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+table tr td button {
+    margin-right: 5px;
+}
+
+.side input[type=text] {
+    border: 0.1px solid #000;
+}

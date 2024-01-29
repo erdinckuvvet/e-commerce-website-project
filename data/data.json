@@ -1,0 +1,136 @@
+[
+  {
+    "name":"Regular Fit T-shirt",
+    "category":"tshirt",
+    "gender":"man",
+    "fit":"regular",
+    "color":["white","black","gray","blue"],
+    "size":["XS","S","M","L","XL","XXL"],
+    "stock":[2000,2000,2000,2000,2000,2000],
+    "image":["tshirt_regular_man_black.jpg","tshirt_regular_man_white.jpg","tshirt_regular_man_gray.jpg","tshirt_regular_man_blue.jpg"],
+    "price": 7.99
+  },
+  {
+    "name":"Slim Fit T-shirt",
+    "category":"tshirt",
+    "gender":"man",
+    "fit":"slim",
+    "color":["white","black","beige","green"],
+    "size":["XS","S","M","L","XL"],
+    "stock":[2000,2000,2000,2000,2000],
+    "image":["tshirt_slim_man_black.jpg","tshirt_slim_man_white.jpg","tshirt_slim_man_beige.jpg","tshirt_slim_man_green.jpg"],
+    "price": 9.99
+  },
+  {
+    "name":"Loose Fit Sweatshirt",
+    "category":"sweatshirt",
+    "gender":"man",
+    "fit":"loose",
+    "color":["white","black","blue","green"],
+    "size":["XS","S","M","L","XL","XXL"],
+    "stock":[
+      [2000,2000,2000,2000,2000,2000],
+      [2000,2000,2000,2000,2000,2000],
+      [2000,2000,2000,2000,2000,2000],
+      [2000,2000,2000,2000,2000,2000]
+    ],
+    "image":["sweatshirt_loose_man_white.jpg","sweatshirt_loose_man_black.jpg","sweatshirt_loose_man_blue.jpg","sweatshirt_loose_man_green.jpg"],
+    "price": 14.99
+  },
+  {
+    "name":"Regular Fit Cargo Pants",
+    "category":"cargopant",
+    "gender":"man",
+    "fit":"regular",
+    "color":["beige"],
+    "size":["XS","S","M","L","XL","XXL"],
+    "stock":[
+      [0,0,0,0,500,1000]
+    ],
+    "image":["cargopant_regular_man_beige.jpg"],
+    "price": 39.99
+  },
+  {
+    "name":"Slim Fit Suit Pants",
+    "category":"suitpant",
+    "gender":"man",
+    "fit":"slim",
+    "color":["black","blue"],
+    "size":["30R","32R","33R","34R","36R","38R","40R","42R"],
+    "stock":[
+      [0,0,0,0,500,1000,1000,1000],
+      [0,0,0,0,500,1000,1000,1000]
+    ],
+    "image":["suitpant_slim_man_black.jpg","suitpant_slim_man_blue.jpg"],
+    "price": 44.99
+  },
+  {
+    "name":"Regular Fit Sweatshirt",
+    "category":"sweatshirt",
+    "gender":"woman",
+    "fit":"regular",
+    "color":["white","blue"],
+    "size":["XS","S","M","L","XL","XXL"],
+    "stock":[
+      [1000,1000,1000,1000,1000,1000],
+      [1000,1000,1000,1000,1000,1000] 
+    ],
+    "image":["sweatshirt_regular_woman_white.jpg","sweatshirt_regular_woman_blue.jpg"],
+    "price": 17.99
+  },
+  {
+    "name":"Slim Fit Mom Jeans",
+    "category":"jeans",
+    "gender":"woman",
+    "fit":"slim",
+    "color":["black","blue"],
+    "size":["0","2","4","6","8","10","12","14"],
+    "stock":[
+      [1000,1000,1000,1000,1000,1000,1000,1000],
+      [1000,1000,1000,1000,1000,1000,1000,1000]
+    ],
+    "image":["jeans_slim_woman_black.jpg","jeans_slim_woman_blue.jpg"],
+    "price": 24.99
+  },
+  {
+    "name":"Wool Blend Shacket",
+    "category":"coat",
+    "gender":"woman",
+    "fit":"regular",
+    "color":["black","gray"],
+    "size":["XS","S","M","L","XL","XXL"],
+    "stock":[
+      [1000,1000,1000,1000,1000,1000],
+      [1000,1000,1000,1000,1000,1000]
+    ],
+    "image":["coat_regular_woman_black.jpg","coat_regular_woman_gray.jpg"],
+    "price": 54.99
+  },
+  {
+    "name":"Cotton Shirt",
+    "category":"shirt",
+    "gender":"woman",
+    "fit":"loose",
+    "color":["white"],
+    "size":["XS","S","M","L","XL","XXL"],
+    "stock":[
+      [1000,1000,1000,1000,1000,1000]
+    ],
+    "image":["shirt_loose_woman_white.jpg"],
+    "price": 25.99
+  },
+  {
+    "name":"High Waist Joggers",
+    "category":"jogger",
+    "gender":"woman",
+    "fit":"regular",
+    "color":["black","white"],
+    "size":["XXS","XS","S","M","L","XL","XXL"],
+    "stock":[
+      [1000,1000,1000,1000,1000,1000,1000],
+      [1000,1000,1000,1000,1000,1000,1000]
+    ],
+    "image":["joggers_regular_woman_black.jpg","joggers_regular_woman_white.jpg"],
+    "price": 24.99
+  }
+]
